@@ -1,4 +1,5 @@
 package com.example.harsh
+
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -18,9 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: UserViewModel
     private lateinit var recyclerView: RecyclerView
-    //private lateinit var userDao : UserDao
-    var currentPage = 1
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        //userDao = AppDatabase.getDatabase(this)?.userDao()!!
         val apiService = Retrofit.Builder()
             .baseUrl("https://randomuser.me/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -48,16 +45,12 @@ class MainActivity : AppCompatActivity() {
 
                     is UserState.Loading -> showLoading()
                     is UserState.Users -> {
-//                        if (currentPage > 1)
-//                        {
-//                            val adapter =  UserAdapter(state.users.results, this@MainActivity, lifecycleScope)
-//                            if (currentPage > 1) {
-//                                adapter.addUsers(state.users.results)
-//                            }
-//                        }
                         showUsers(state.users.results)
                     }
-                    is UserState.Error -> {showError(state.error)}
+
+                    is UserState.Error -> {
+                        showError(state.error)
+                    }
                 }
             }
         }
@@ -75,29 +68,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-//                val visibleItemCount = layoutManager.childCount
-//                val totalItemCount = layoutManager.itemCount
-//                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-//
-//                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount - 2 && totalItemCount >= 10) {
-//                    currentPage++
-//                    viewModel.handleIntent(UserIntent.FetchUsers)
-//                }
-//            }
-//        })
-
     }
 
     private fun showLoading() {
     }
 
     private fun showUsers(users: MutableList<User>) {
-        //val adapter = userDao?.let { UserAdapter(users, this, it, lifecycleScope) }
-        val adapter =  UserAdapter(users, this, lifecycleScope)
+        val adapter = UserAdapter(users, this, lifecycleScope)
         recyclerView.adapter = adapter
     }
 
@@ -106,7 +83,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isInternetAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val network = connectivityManager.activeNetwork ?: return false
             val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false

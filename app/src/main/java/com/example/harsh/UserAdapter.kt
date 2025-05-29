@@ -68,9 +68,4 @@ class UserAdapter(
         }
     }
 
-//    fun addUsers(newUsers: List<User>) {
-//        val start = users.size
-//        users.addAll(newUsers)
-//        notifyItemRangeInserted(start, newUsers.size)
-//    }
 }

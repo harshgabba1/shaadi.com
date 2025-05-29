@@ -2,9 +2,6 @@ package com.example.harsh
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.harsh.UserIntent
-import com.example.harsh.UserRepository
-import com.example.harsh.UserState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

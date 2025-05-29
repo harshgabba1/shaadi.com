@@ -3,9 +3,6 @@ package com.example.harsh
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-//import androidx.room.Entity
-
-
 data class ApiResponse(
     val results: MutableList<User>,
     val info: Info
@@ -29,25 +26,6 @@ data class User(
     var isButtonCLicked : Boolean = false,
     var accepted : Boolean = false
 )
-
-
-//@Entity(tableName = "user_table")
-//data class User1(
-//    val gender: String,
-//    val name: Name,
-//    val location: Location,
-//    val email: String,
-//    val login: Login,
-//    val dob: Dob,
-//    val registered: Registered,
-//    val phone: String,
-//    val cell: String,
-//    val id: Id,
-//    val picture: Picture,
-//    val nat: String,
-//    var isButtonCLicked : Boolean = false,
-//    var accepted : Boolean = false
-//)
 
 data class Name(
     val title: String,
