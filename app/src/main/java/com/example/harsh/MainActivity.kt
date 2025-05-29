@@ -62,15 +62,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val userDao = DatabaseProvider.getDatabase(this).userDao()
+
         if (isInternetAvailable(this)) {
             viewModel.handleIntent(UserIntent.FetchUsers)
         } else {
-//            lifecycleScope.launch {
-//                val users = userDao?.getAllUsers()
-//                if (users != null) {
-//                    showUsers(users)
-//                }
-//            }
+            lifecycleScope.launch {
+                val users = userDao.getAll()
+                if (users != null) {
+                    showUsers(users)
+                }
+            }
         }
 
 //        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {

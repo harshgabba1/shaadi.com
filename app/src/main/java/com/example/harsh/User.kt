@@ -1,5 +1,8 @@
 package com.example.harsh
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 //import androidx.room.Entity
 
 
@@ -8,7 +11,9 @@ data class ApiResponse(
     val info: Info
 )
 
+@Entity(tableName = "user_table")
 data class User(
+    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
     val gender: String,
     val name: Name,
     val location: Location,

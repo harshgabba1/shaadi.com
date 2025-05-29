@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    //alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -67,10 +67,11 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation (libs.glide)
     implementation(libs.androidx.cardview)
-//    implementation (libs.androidx.room.runtime)
-//    implementation (libs.androidx.room.compiler)
-//    implementation (libs.androidx.room.ktx)
     implementation(libs.annotations)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.gson)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

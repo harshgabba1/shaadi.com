@@ -62,11 +62,10 @@ class UserAdapter(
             .load(user.picture.large)
             .into(holder.imageView)
 
-//        lifecycleScope.launch {
-//            userDao.insert(
-//                user
-//            )
-//        }
+        lifecycleScope.launch {
+            val userDao = DatabaseProvider.getDatabase(context).userDao()
+            userDao.insertAll(user)
+        }
     }
 
 //    fun addUsers(newUsers: List<User>) {
